@@ -15,14 +15,14 @@ public class JpaMain {
         try {
             // 비영속 상태
             Member kakao = new Member("Kakao");
+            Member naver = new Member("Naver");
             // 영속화
             manager.persist(kakao);
-            // 준영속, 한번 영속화 됐던 엔티티를 해제시키는것
-            manager.detach(kakao);
-            // 삭제
-            manager.remove(kakao);
-            //commit
+            manager.persist(naver);
+            //commit - 이 시점에 실제 쿼리가 날라간다.
+            System.out.println("<------------------");
             transaction.commit();
+            System.out.println("------------------>");
         }catch (Exception e) {
             transaction.rollback();
         }finally {
