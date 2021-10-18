@@ -19,7 +19,12 @@ public class JpaMain {
             // 영속화
             manager.persist(kakao);
             manager.persist(naver);
-            //commit - 이 시점에 실제 쿼리가 날라간다.
+            // 변경감지
+            System.out.println("<------------------");
+            kakao.setName("Daum");
+            System.out.println("------------------>");
+
+            //commit - 이 시점에 쓰기지연 SQL저장소에 담겨있던 UPDATE쿼리문이 날라간다
             System.out.println("<------------------");
             transaction.commit();
             System.out.println("------------------>");
