@@ -5,25 +5,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@TableGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        table = "MY_SEQUENCES",
+        pkColumnValue = "MEMBER_SEQ", allocationSize = 1)
 public class Member {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
-
     private String name;
-    private Integer age;
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-    private LocalDate createDate;
-    private LocalDateTime lastModifiedDate;
-    @Lob
-    private String description;
 
     public Member(String name) {
         this.name = name;
