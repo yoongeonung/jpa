@@ -14,9 +14,15 @@ public class JpaMain {
         transaction.begin();
         try {
             // 비영속 상태
-            Member kakao = new Member("Kakao");
+            Team team = new Team();
+            team.setName("Kakao");
+
+            Member member = new Member("civilian");
+            member.setTeam(team);//단방향 연관관계 설정, 참조 저장
+
             // 영속화
-            manager.persist(kakao);
+            manager.persist(team);
+            manager.persist(member);
 
             //commit
             System.out.println("<------------------");
