@@ -17,25 +17,18 @@ public class JpaMain {
             // 비영속 상태
             Team team = new Team();
             team.setName("Kakao");
-            System.out.println("<------------------");
             manager.persist(team);
-            System.out.println("------------------>");
             Member member = new Member("civilian");
-            member.setTeam(team);
-            System.out.println("<------------------");
+            // 연관관계 편의 메서드
+            member.addTeam(team);
             manager.persist(member);
-            System.out.println("------------------>");
 
             // 영속화 컨텍스트 clear
-            System.out.println("<------------------");
             manager.flush();
             manager.clear();
-            System.out.println("------------------>");
 
             // DB에서 조회
-            System.out.println("<------------------");
             Member findMember = manager.find(Member.class, member.getId());
-            System.out.println("------------------>");
             List<Member> members = findMember.getTeam().getMembers();
             for (Member member1 : members) {
                 System.out.println("member1 = " + member1);

@@ -15,8 +15,13 @@ public class Member {
     private String name;
     @ManyToOne
     @JoinColumn(name = "TEAM_ID") // Member table의 FK와 매핑
-    private Team team;
+    private Team team; // 연관관계의 주인
     public Member(String name) {
         this.name = name;
+    }
+
+    public void addTeam(Team team) {
+        team.getMembers().add(this);
+        this.team = team;
     }
 }
