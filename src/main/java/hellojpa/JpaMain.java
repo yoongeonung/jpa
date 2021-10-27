@@ -15,25 +15,14 @@ public class JpaMain {
         transaction.begin();
         try {
             // 비영속 상태
-            Team team = new Team();
-            team.setName("Kakao");
-            manager.persist(team);
-            Member member = new Member("civilian");
-            // 연관관계 편의 메서드
-            member.addTeam(team);
+            Member member = new Member();
+            member.setName("OneToMany");
             manager.persist(member);
 
-            // 영속화 컨텍스트 clear
-            manager.flush();
-            manager.clear();
-
-            // DB에서 조회
-            Member findMember = manager.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
-            for (Member member1 : members) {
-                System.out.println("member1 = " + member1);
-            }
-
+            Team team = new Team();
+            team.setName("OneToManyTeam");
+            team.getMembers().add(member);
+            manager.persist(team);
 
             //commit
             System.out.println("<------------------");
