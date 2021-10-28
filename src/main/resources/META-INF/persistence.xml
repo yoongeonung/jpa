@@ -7,6 +7,7 @@
         <!-- class태그는 순수 jpa-gradle 환경에서는 넣어줄 필요가있음, 스프링 사용시 자동 스캔하기때문에 불필요 -->
         <class>hellojpa.Member</class>
         <class>hellojpa.Team</class>
+        <class>hellojpa.Locker</class>
 <!--        <class>jpashop.domain.Item</class>-->
 <!--        <class>jpashop.domain.Member</class>-->
 <!--        <class>jpashop.domain.OrderItem</class>-->
