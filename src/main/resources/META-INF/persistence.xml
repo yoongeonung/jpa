@@ -8,6 +8,7 @@
         <class>hellojpa.Member</class>
         <class>hellojpa.Team</class>
         <class>hellojpa.Locker</class>
+        <class>hellojpa.Product</class>
 <!--        <class>jpashop.domain.Item</class>-->
 <!--        <class>jpashop.domain.Member</class>-->
 <!--        <class>jpashop.domain.OrderItem</class>-->

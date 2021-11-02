@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -17,6 +19,13 @@ public class Member {
     @OneToOne
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
+
+    @ManyToMany
+    @JoinTable(name = "Member_Product")
+    private List<Product> products = new ArrayList<>();
+
+
+    // constructor
     public Member(String name) {
         this.name = name;
     }
