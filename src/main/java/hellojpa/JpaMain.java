@@ -15,14 +15,13 @@ public class JpaMain {
         try {
             // 비영속 상태
             Locker locker = new Locker();
-            locker.setName("1000엔락커");
-            System.out.println("<------------------");
-            manager.persist(locker);
-            System.out.println("------------------>");
-
             Member member = new Member();
+            locker.setName("1000엔락커");
             member.setName("OneToOne");
+            locker.setMember(member); // 객체 지향 관점
             member.setLocker(locker); // 객체 지향 관점
+
+            manager.persist(locker);
             manager.persist(member);
 
             //commit
