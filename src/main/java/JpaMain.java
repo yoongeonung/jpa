@@ -1,4 +1,8 @@
-package hellojpa;
+import hellojpa.Locker;
+import hellojpa.Member;
+import inheritancemapping.Book;
+import inheritancemapping.Item;
+import inheritancemapping.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,17 +17,8 @@ public class JpaMain {
         EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
         try {
-            // 비영속 상태
-            Locker locker = new Locker();
-            Member member = new Member();
-            locker.setName("1000엔락커");
-            member.setName("OneToOne");
-            locker.setMember(member); // 객체 지향 관점
-            member.setLocker(locker); // 객체 지향 관점
-
-            manager.persist(locker);
-            manager.persist(member);
-
+            Movie movie = new Movie("Avengers", 2500, "Marks", "Robert");
+            manager.persist(movie);
             //commit
             System.out.println("<------------------");
             transaction.commit();

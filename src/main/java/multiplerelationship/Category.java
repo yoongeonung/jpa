@@ -17,7 +17,7 @@ public class Category {
     @Column(name = "NAME")
     private String name;
     @OneToMany(mappedBy = "category")
-    private List<Item> items = new ArrayList<>();
+    private List<CategoryItem> items = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
     private Category parent;

@@ -19,12 +19,13 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
     @OneToMany(mappedBy = "order")
-    private List<Order> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
     @OneToOne
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
     @Column(name = "LOCALDATE")
     private LocalDate orderDate;
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private OrderStatus stauts;
 }
