@@ -24,10 +24,21 @@
 <!--        <class>multiplerelationship.Order</class>-->
 <!--        <class>multiplerelationship.OrderItem</class>-->
 <!--        Inheritance Mapping -->
-        <class>inheritancemapping.Item</class>
-        <class>inheritancemapping.Album</class>
-        <class>inheritancemapping.Book</class>
-        <class>inheritancemapping.Movie</class>
+<!--        <class>inheritancemapping.Item</class>-->
+<!--        <class>inheritancemapping.Album</class>-->
+<!--        <class>inheritancemapping.Book</class>-->
+<!--        <class>inheritancemapping.Movie</class>-->
+<!--        <class>inheritancemapping.BaseEntity</class>-->
+<!--        PRACTICE 4 -->
+        <class>practice4.Album</class>
+        <class>practice4.Book</class>
+        <class>practice4.Category</class>
+        <class>practice4.Delivery</class>
+        <class>practice4.Item</class>
+        <class>practice4.Member</class>
+        <class>practice4.Movie</class>
+        <class>practice4.Order</class>
+        <class>practice4.OrderItem</class>
         <properties>
             <!-- 필수 속성 -->
             <!-- mysql -->

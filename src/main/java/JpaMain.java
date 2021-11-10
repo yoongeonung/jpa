@@ -1,7 +1,3 @@
-import hellojpa.Locker;
-import hellojpa.Member;
-import inheritancemapping.Book;
-import inheritancemapping.Item;
 import inheritancemapping.Movie;
 
 import javax.persistence.EntityManager;
@@ -17,8 +13,10 @@ public class JpaMain {
         EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
         try {
-            Movie movie = new Movie("Avengers", 2500, "Marks", "Robert");
-            manager.persist(movie);
+
+
+
+
             //commit
             System.out.println("<------------------");
             transaction.commit();

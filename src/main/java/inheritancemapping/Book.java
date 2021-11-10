@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Getter @Setter
+@DiscriminatorValue("B")
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "BOOK")
 public class Book extends Item{
     @Column(name = "AUTHOR")
