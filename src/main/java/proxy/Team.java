@@ -14,4 +14,6 @@ public class Team {
     private Long id;
     @Column(name = "NAME")
     private String name;
+    @Transient
+    private Member member;
 }

@@ -1,61 +1,54 @@
-import inheritancemapping.practice4.Category;
+import proxy.Member;
+import proxy.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
 
 public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hello");
-        EntityManager manager = factory.createEntityManager();
+        EntityManager em = factory.createEntityManager();
         // transaction
-        EntityTransaction transaction = manager.getTransaction();
+        EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
-            // MUSIC
-            Category musicCategory = new Category();
-            musicCategory.setName("MUSIC");
-            // MUSIC_CHILDREN
-            ArrayList<Category> musicCategories = new ArrayList<>();
-            // POP
-            Category pop = new Category();
-            pop.setParent(musicCategory);
-            pop.setName("POP");
-            musicCategories.add(pop);
-            // POP_CHILDREN
-            ArrayList<Category> popCategories = new ArrayList<>();
-            // KPOP
-            Category kpop = new Category();
-            kpop.setName("KPOP");
-            kpop.setParent(pop);
-            popCategories.add(kpop);
-            // JPOP
-            Category jpop = new Category();
-            jpop.setName("JPOP");
-            jpop.setParent(pop);
-            popCategories.add(jpop);
+            Team team = new Team();
+            team.setName("Kakao");
 
-            // POP <- POP_CHILDREN
-            pop.setChild(popCategories);
-            // MUSIC <- POP
-            musicCategory.setChild(musicCategories);
+            Member member1 = new Member();
+            member1.setUsername("Yoon");
+            member1.setTeam(team);
+            team.setMember(member1); // 객체관점, DB반영 X
 
+            Member member2 = new Member();
+            member2.setUsername("Kim");
+            member2.setTeam(team);
+            team.setMember(member2); // 객체관점, DB반영 X
 
-            manager.persist(musicCategory);
-            manager.persist(pop);
-            manager.persist(kpop);
-            manager.persist(jpop);
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(team);
+            // persistence context clear
+            em.flush();
+            em.clear();
+            // getRef
+            Member refMember1 = em.find(Member.class, member1.getId());
+            Member refMember2 = em.getReference(Member.class, member2.getId());
+            System.out.println("ref instanceof Member  :  " + (refMember2 instanceof Member));
+            System.out.println("refMember1.getClass() = " + refMember1.getClass());
+            System.out.println("refMember2.getClass() = " + refMember2.getClass());
+
             //commit
-            System.out.println("<------------------");
+            System.out.println("<----------commit--------");
             transaction.commit();
-            System.out.println("------------------>");
+            System.out.println("----------commit-------->");
         }catch (Exception e) {
             transaction.rollback();
         }finally {
             // close
-            manager.close();
+            em.close();
         }
         factory.close();
     }

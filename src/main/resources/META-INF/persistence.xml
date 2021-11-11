@@ -30,16 +30,19 @@
 <!--        <class>inheritancemapping.Movie</class>-->
 <!--        <class>inheritancemapping.BaseEntity</class>-->
 <!--        PRACTICE 4 -->
-        <class>inheritancemapping.practice4.Album</class>
-        <class>inheritancemapping.practice4.Book</class>
-        <class>inheritancemapping.practice4.Category</class>
-        <class>inheritancemapping.practice4.Delivery</class>
-        <class>inheritancemapping.practice4.Item</class>
-        <class>inheritancemapping.practice4.Member</class>
-        <class>inheritancemapping.practice4.Movie</class>
-        <class>inheritancemapping.practice4.Order</class>
-        <class>inheritancemapping.practice4.OrderItem</class>
-        <class>inheritancemapping.practice4.CategoryItem</class>
+<!--        <class>inheritancemapping.practice4.Album</class>-->
+<!--        <class>inheritancemapping.practice4.Book</class>-->
+<!--        <class>inheritancemapping.practice4.Category</class>-->
+<!--        <class>inheritancemapping.practice4.Delivery</class>-->
+<!--        <class>inheritancemapping.practice4.Item</class>-->
+<!--        <class>inheritancemapping.practice4.Member</class>-->
+<!--        <class>inheritancemapping.practice4.Movie</class>-->
+<!--        <class>inheritancemapping.practice4.Order</class>-->
+<!--        <class>inheritancemapping.practice4.OrderItem</class>-->
+<!--        <class>inheritancemapping.practice4.CategoryItem</class>-->
+<!--        Proxy       -->
+        <class>proxy.Team</class>
+        <class>proxy.Member</class>
         <properties>
             <!-- 필수 속성 -->
             <!-- mysql -->
