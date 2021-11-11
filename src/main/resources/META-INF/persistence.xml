@@ -30,16 +30,16 @@
 <!--        <class>inheritancemapping.Movie</class>-->
 <!--        <class>inheritancemapping.BaseEntity</class>-->
 <!--        PRACTICE 4 -->
-        <class>practice4.Album</class>
-        <class>practice4.Book</class>
-        <class>practice4.Category</class>
-        <class>practice4.Delivery</class>
-        <class>practice4.Item</class>
-        <class>practice4.Member</class>
-        <class>practice4.Movie</class>
-        <class>practice4.Order</class>
-        <class>practice4.OrderItem</class>
-        <class>practice4.CategoryItem</class>
+        <class>inheritancemapping.practice4.Album</class>
+        <class>inheritancemapping.practice4.Book</class>
+        <class>inheritancemapping.practice4.Category</class>
+        <class>inheritancemapping.practice4.Delivery</class>
+        <class>inheritancemapping.practice4.Item</class>
+        <class>inheritancemapping.practice4.Member</class>
+        <class>inheritancemapping.practice4.Movie</class>
+        <class>inheritancemapping.practice4.Order</class>
+        <class>inheritancemapping.practice4.OrderItem</class>
+        <class>inheritancemapping.practice4.CategoryItem</class>
         <properties>
             <!-- 필수 속성 -->
             <!-- mysql -->

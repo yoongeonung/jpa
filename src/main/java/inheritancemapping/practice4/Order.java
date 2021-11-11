@@ -1,4 +1,4 @@
-package practice4;
+package inheritancemapping.practice4;
 
 import lombok.Getter;
 import lombok.Setter;

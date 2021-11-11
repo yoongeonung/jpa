@@ -1,4 +1,4 @@
-package practice4;
+package inheritancemapping.practice4;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;

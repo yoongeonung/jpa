@@ -1,4 +1,4 @@
-import practice4.Category;
+import inheritancemapping.practice4.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
