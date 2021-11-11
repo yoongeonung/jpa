@@ -1,18 +1,26 @@
 package practice4;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "CATEGORY")
+@Getter @Setter
 public class Category {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CATEGORY_ID")
     private Long id;
+    @Column(name = "NAME")
     private String name;
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    private List<CategoryItem> items = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
     private Category parent;
+    @OneToMany(mappedBy = "parent")
     private List<Category> child;
 }

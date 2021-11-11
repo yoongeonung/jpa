@@ -22,5 +22,6 @@ public class Member {
     private String street;
     @Column(name = "ZIPCODE")
     private String zipcode;
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>(); // 양방향
 }

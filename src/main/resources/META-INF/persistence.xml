@@ -39,6 +39,7 @@
         <class>practice4.Movie</class>
         <class>practice4.Order</class>
         <class>practice4.OrderItem</class>
+        <class>practice4.CategoryItem</class>
         <properties>
             <!-- 필수 속성 -->
             <!-- mysql -->
