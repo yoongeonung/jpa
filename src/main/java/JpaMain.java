@@ -33,12 +33,12 @@ public class JpaMain {
             // persistence context clear
             em.flush();
             em.clear();
-            // getRef
-            Member refMember1 = em.find(Member.class, member1.getId());
-            Member refMember2 = em.getReference(Member.class, member2.getId());
-            System.out.println("ref instanceof Member  :  " + (refMember2 instanceof Member));
-            System.out.println("refMember1.getClass() = " + refMember1.getClass());
-            System.out.println("refMember2.getClass() = " + refMember2.getClass());
+            // get member
+            Member member = em.find(Member.class, member1.getId());
+            // get team
+            System.out.println("------------------------------");
+            System.out.println("team name = " + member.getTeam().getName());
+            System.out.println("------------------------------");
 
             //commit
             System.out.println("<----------commit--------");
