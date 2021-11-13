@@ -19,17 +19,15 @@ public class JpaMain {
 
             Member member1 = new Member();
             member1.setUsername("Yoon");
-            member1.setTeam(team);
-            team.setMember(member1); // 객체관점, DB반영 X
+            team.addMember(member1);
 
             Member member2 = new Member();
             member2.setUsername("Kim");
-            member2.setTeam(team);
-            team.setMember(member2); // 객체관점, DB반영 X
+            team.addMember(member2);
 
-            em.persist(member1);
-            em.persist(member2);
-            em.persist(team);
+            em.persist(team); // cacade
+
+
             // persistence context clear
             em.flush();
             em.clear();

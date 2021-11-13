@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TEAM")
@@ -14,6 +16,12 @@ public class Team {
     private Long id;
     @Column(name = "NAME")
     private String name;
-    @Transient
-    private Member member;
+//    @Transient
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    private List<Member> members = new ArrayList<>();
+
+    public void addMember(Member member) {
+        members.add(member);
+        member.setTeam(this);
+    }
 }
