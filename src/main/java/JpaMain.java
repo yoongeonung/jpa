@@ -27,21 +27,16 @@ public class JpaMain {
 
             em.persist(team); // cacade
 
-
             // persistence context clear
             em.flush();
             em.clear();
-            // get member
-            Member member = em.find(Member.class, member1.getId());
-            // get team
-            System.out.println("------------------------------");
-            System.out.println("team name = " + member.getTeam().getName());
-            System.out.println("------------------------------");
 
-            //commit
-            System.out.println("<----------commit--------");
+            //
+            Team foundedTeam = em.find(Team.class, team.getId());
+            // orphan remove
+            foundedTeam.getMembers().remove(0);
+
             transaction.commit();
-            System.out.println("----------commit-------->");
         }catch (Exception e) {
             transaction.rollback();
         }finally {

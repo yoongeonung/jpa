@@ -16,8 +16,7 @@ public class Team {
     private Long id;
     @Column(name = "NAME")
     private String name;
-//    @Transient
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
 
     public void addMember(Member member) {
