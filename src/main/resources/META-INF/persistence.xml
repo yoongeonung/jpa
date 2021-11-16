@@ -8,6 +8,7 @@
         <class>prac5.Album</class>
         <class>prac5.Book</class>
         <class>prac5.Category</class>
+        <class>prac5.CategoryItem</class>
         <class>prac5.Delivery</class>
         <class>prac5.Item</class>
         <class>prac5.Member</class>

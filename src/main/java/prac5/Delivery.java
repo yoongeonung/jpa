@@ -12,7 +12,7 @@ public class Delivery {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DELIVERY_ID")
     private Long id;
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY) // default EAGER -> LAZY로 변경
     private Order order;
     @Column(name = "CITY")
     private String city;

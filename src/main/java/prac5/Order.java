@@ -15,12 +15,12 @@ public class Order {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID") // FK
     private Member member;
-    @OneToMany(mappedBy = "order") // 양방향 매핑
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // 양방향 매핑, 영속성 전이 설정
     private List<OrderItem> orderItems = new ArrayList<>();
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // default EAGER -> LAZY로 변경 , 영속성 전이 설정
     @JoinColumn(name = "DELIVERY_ID") // FK
     private Delivery delivery;
     private LocalDateTime orderDate;
