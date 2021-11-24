@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "MEMBER")
@@ -27,4 +29,7 @@ public class Member {
                     @AttributeOverride(name = "zipcode", column = @Column(name = "HOME_ZIPCODE"))
     })
     private Address homeAddress;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "member")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 }

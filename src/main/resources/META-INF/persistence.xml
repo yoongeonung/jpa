@@ -6,6 +6,7 @@
     <persistence-unit name="hello">
 <!-- class태그는 순수 jpa-gradle 환경에서는 넣어줄 필요가있음, 스프링 사용시 자동 스캔하기때문에 불필요 -->
         <class>valuetype.Member</class>
+        <class>valuetype.AddressEntity</class>
         <properties>
             <!-- 필수 속성 -->
             <!-- mysql -->
