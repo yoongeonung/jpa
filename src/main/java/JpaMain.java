@@ -1,7 +1,3 @@
-import proxy.Team;
-import valuetype.Address;
-import valuetype.Member;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
