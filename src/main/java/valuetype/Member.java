@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "MEMBER")
@@ -32,4 +34,15 @@ public class Member {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "member")
     private List<AddressEntity> addressHistory = new ArrayList<>();
+
+    /**
+     * String 처럼 값이 하나인 값타입의 컬렉션의 경우
+     * @Column() 을 이용하여 값 타입의 컬럼 이름을 지정해줄 수 있다.
+     */
+    @Column(name = "FOOD_NAME")
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    private Set<String> favoriteFoods = new HashSet<>();
+
+
 }
