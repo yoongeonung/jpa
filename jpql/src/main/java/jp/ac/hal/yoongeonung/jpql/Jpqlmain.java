@@ -1,9 +1,6 @@
 package jp.ac.hal.yoongeonung.jpql;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class Jpqlmain {
@@ -13,15 +10,22 @@ public class Jpqlmain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member();
-            member.setAge(20);
-            member.setUsername("Kakao");
+            for (int i = 0; i < 100; i++) {
+                Member member = new Member();
+                member.setUsername("member" + i);
+                member.setAge(20 + i);
+                em.persist(member);
+            }
+            em.flush();
+            em.clear();
 
-            em.persist(member);
-            String name = "Kakao";
-            List<Member> members = em.createQuery("select m from Member m where m.username = :name", Member.class).setParameter("name", name).getResultList();
-            for (Member member1 : members) {
-                System.out.println("member1 = " + member1.getUsername());
+
+            TypedQuery<Member> query = em.createQuery("select m from Member m order by m.age desc ", Member.class)
+                    .setFirstResult(0).setMaxResults(10);
+            List<Member> members = query.getResultList();
+            for (Member m : members) {
+                System.out.println("m.getUsername() = " + m.getUsername());
+                System.out.println("m.getAge() = " + m.getAge());
             }
 
             // commit
