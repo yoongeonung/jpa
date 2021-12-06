@@ -20,8 +20,12 @@ public class Member {
     @Setter
     private int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
-    @Setter
     private Team team;
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMember().add(this);
+    }
 }

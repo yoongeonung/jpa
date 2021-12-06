@@ -10,23 +10,20 @@ public class Jpqlmain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setUsername("member" + i);
-                member.setAge(20 + i);
-                em.persist(member);
-            }
-            em.flush();
-            em.clear();
+            Team team = new Team();
+            team.setName("Kakao");
 
+            Member member = new Member();
+            member.setUsername("MemberA");
+            member.setAge(20);
+            // 연관관계 편의 메서드
+            member.changeTeam(team);
 
-            TypedQuery<Member> query = em.createQuery("select m from Member m order by m.age desc ", Member.class)
-                    .setFirstResult(0).setMaxResults(10);
-            List<Member> members = query.getResultList();
-            for (Member m : members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-                System.out.println("m.getAge() = " + m.getAge());
-            }
+            em.persist(member);
+            em.persist(team);
+
+            Query query = em.createQuery("select m from Member m inner join m.team t");
+            List resultList = query.getResultList();
 
             // commit
             tx.commit();
