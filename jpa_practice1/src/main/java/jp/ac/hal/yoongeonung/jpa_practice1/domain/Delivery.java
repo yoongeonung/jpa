@@ -1,10 +1,15 @@
 package jp.ac.hal.yoongeonung.jpa_practice1.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
 public class Delivery {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "delivery_id")
     private Long id;
     @OneToOne(mappedBy = "delivery",fetch = FetchType.LAZY)

@@ -1,8 +1,13 @@
 package jp.ac.hal.yoongeonung.jpa_practice1.domain;
 
+import jp.ac.hal.yoongeonung.jpa_practice1.domain.Item.Item;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
 public class CategoryItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

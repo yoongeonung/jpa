@@ -1,5 +1,6 @@
 package jp.ac.hal.yoongeonung.jpa_practice1.domain;
 
+import jp.ac.hal.yoongeonung.jpa_practice1.domain.Item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,9 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
-    private int orderPrice;
-    private int count;
+
+    private int orderPrice; // 주문 당시의 가격
+    private int count; // 주문 당시의 수량
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
