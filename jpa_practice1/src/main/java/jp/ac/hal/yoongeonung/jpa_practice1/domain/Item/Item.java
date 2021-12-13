@@ -1,6 +1,7 @@
 package jp.ac.hal.yoongeonung.jpa_practice1.domain.Item;
 
 import jp.ac.hal.yoongeonung.jpa_practice1.domain.CategoryItem;
+import jp.ac.hal.yoongeonung.jpa_practice1.exception.NotEnoughStockQuantityException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,4 +25,27 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     private List<CategoryItem> categoryItems = new ArrayList<>();
+
+    /*
+        재고수량 증가
+     */
+    public void addStock(int stockQuantity) {
+        this.stockQuantity += stockQuantity;
+    }
+
+
+    /*
+        재고수량 감소
+     */
+    public void decreaseStock(int stockQuantity) {
+        this.stockQuantity = getStockQuantity(stockQuantity);
+    }
+
+    private int getStockQuantity(int stockQuantity) {
+        int restQuantity = this.stockQuantity - stockQuantity;
+        if (restQuantity < 0) {
+            throw new NotEnoughStockQuantityException("재고수량이 부족합니다.");
+        }
+        return restQuantity;
+    }
 }
