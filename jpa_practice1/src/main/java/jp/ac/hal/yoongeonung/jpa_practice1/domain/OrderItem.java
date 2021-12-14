@@ -25,4 +25,31 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    // 생성 메서드
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.decreaseStock(count);
+        return orderItem;
+    }
+
+    // 비즈니스 로직
+
+    /**
+     * 주문 취소
+     */
+    public void cancel() {
+        item.addStock(count);
+    }
+
+    /**
+     * 조회
+     */
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }
