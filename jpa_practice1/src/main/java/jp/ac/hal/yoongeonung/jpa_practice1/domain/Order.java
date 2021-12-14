@@ -1,6 +1,8 @@
 package jp.ac.hal.yoongeonung.jpa_practice1.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
@@ -66,6 +69,9 @@ public class Order {
         Arrays.stream(orderItems).forEach(order::addOrderItem);
         return order;
     }
+
+//    protected Order() {
+//    }
 
     // 비즈니스 로직
 
