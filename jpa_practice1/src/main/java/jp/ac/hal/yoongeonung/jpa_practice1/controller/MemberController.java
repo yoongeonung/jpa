@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,5 +37,14 @@ public class MemberController {
         member.setName(memberForm.getName());
         memberService.join(member);
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        // 왠만하면 직접 엔티티를 사용하기 보다는 DTO로 전환해서 보내는걸 추천한다.
+        // 특히 api를 만들경우 절대 엔티티를 직접 반환하면 안된다.
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }
