@@ -1,5 +1,6 @@
 package jp.ac.hal.yoongeonung.jpa_practice1.service;
 
+import jp.ac.hal.yoongeonung.jpa_practice1.controller.OrderFormDTO;
 import jp.ac.hal.yoongeonung.jpa_practice1.domain.Delivery;
 import jp.ac.hal.yoongeonung.jpa_practice1.domain.Item.Item;
 import jp.ac.hal.yoongeonung.jpa_practice1.domain.Member;
@@ -25,18 +26,18 @@ public class OrderService {
      * 주문
      */
     @Transactional
-    public Long order(Long memberId, Long itemId, int count) {
+    public Long order(OrderFormDTO formDTO) {
 
         // 엔티티 조회
-        Member member = memberRepository.findOne(memberId);
-        Item item = itemRepository.findOne(itemId);
+        Member member = memberRepository.findOne(formDTO.getMemberId());
+        Item item = itemRepository.findOne(formDTO.getItemId());
 
         // 배송정보 생성
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
 
         // 주문상품 생성
-        OrderItem orderItem = OrderItem.createOrderItem(item,item.getPrice(),count);
+        OrderItem orderItem = OrderItem.createOrderItem(item,item.getPrice(), formDTO.getCount());
 
         // 주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
