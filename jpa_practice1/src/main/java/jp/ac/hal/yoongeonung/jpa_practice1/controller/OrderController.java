@@ -2,6 +2,8 @@ package jp.ac.hal.yoongeonung.jpa_practice1.controller;
 
 import jp.ac.hal.yoongeonung.jpa_practice1.domain.Item.Item;
 import jp.ac.hal.yoongeonung.jpa_practice1.domain.Member;
+import jp.ac.hal.yoongeonung.jpa_practice1.domain.Order;
+import jp.ac.hal.yoongeonung.jpa_practice1.repository.OrderSearch;
 import jp.ac.hal.yoongeonung.jpa_practice1.service.ItemService;
 import jp.ac.hal.yoongeonung.jpa_practice1.service.MemberService;
 import jp.ac.hal.yoongeonung.jpa_practice1.service.OrderService;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -47,6 +50,19 @@ public class OrderController {
          * DTO는 어디에 정의해두는가에 따라 다르겠지만, 서비스에서도 사용할 수 있고, 리포지토리에서도 사용할 수 있습니다.
          */
         orderService.order(orderFormDTO);
+        return "redirect:/orders";
+    }
+
+    @GetMapping("/orders")
+    public String orderList(@ModelAttribute OrderSearch orderSearch, Model model) {
+        List<Order> orders = orderService.findOrders(orderSearch);
+        model.addAttribute("orders", orders);
+        return "order/orderList";
+    }
+
+    @PostMapping("/orders/{orderId}/cancel")
+    public String cancleOrder(@PathVariable Long orderId) {
+        orderService.cancelOrder(orderId);
         return "redirect:/orders";
     }
 }

@@ -9,9 +9,12 @@ import jp.ac.hal.yoongeonung.jpa_practice1.domain.OrderItem;
 import jp.ac.hal.yoongeonung.jpa_practice1.repository.ItemRepository;
 import jp.ac.hal.yoongeonung.jpa_practice1.repository.MemberRepository;
 import jp.ac.hal.yoongeonung.jpa_practice1.repository.OrderRepository;
+import jp.ac.hal.yoongeonung.jpa_practice1.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,7 +64,9 @@ public class OrderService {
         order.cancel();
     }
 
-    // search
+      public List<Order> findOrders(OrderSearch orderSearch) {
+          return orderRepository.findAll(orderSearch);
+      }
 
     public Order findOne(Long id) {
         return orderRepository.findOne(id);
