@@ -1,23 +1,36 @@
 package jp.ac.hal.yoongeonung.jpa_practice2.api;
 
+import jp.ac.hal.yoongeonung.jpa_practice2.domain.Address;
 import jp.ac.hal.yoongeonung.jpa_practice2.domain.Member;
 import jp.ac.hal.yoongeonung.jpa_practice2.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
 
     private final MemberService memberService;
+
+    @GetMapping("/api/v1/members")
+    public List<Member> membersV1() {
+        return memberService.findAll();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result membersV2() {
+        List<MemberDTO> collect = memberService.findAll().stream().map(
+                m -> new MemberDTO(m.getName(), m.getAddress().getCity(), m.getAddress().getStreet(), m.getAddress().getZipcode())
+        ).collect(Collectors.toList());
+        return new Result(collect.size(),collect);
+    }
 
     /**
      * 등록 V1: 요청 값으로 Member 엔티티를 직접 받는다.
@@ -46,13 +59,36 @@ public class MemberApiController {
     public CreateMemberResponse saveMemberV2(@RequestBody @Valid CreateMemberRequest createMemberRequest) {
         Member member = new Member();
         member.setName(createMemberRequest.getName());
+        member.setAddress(new Address(createMemberRequest.getCity(),createMemberRequest.getStreet(),createMemberRequest.getZipcode()));
         Long joinedId = memberService.join(member);
         return new CreateMemberResponse(joinedId);
     }
 
+    /**
+     * 수정 API
+     */
+    @PutMapping("/api/v2/members/{id}")
+    public UpdateMemberResponse updateMemberV2(@PathVariable Long id, @RequestBody @Valid UpdateMemberRequest updateMemberRequest) {
+        // command
+        memberService.update(id, updateMemberRequest.getName());
+        // query , command와 쿼리는 분리해야한다.
+        Member member = memberService.findOne(id);
+        return new UpdateMemberResponse(member.getId(), member.getName());
+    }
+
+
+    /**
+     * 밖에서 사용하지 않는 DTO를 굳이 밖에다 만들 필요는 없다
+     * 이 클래스 안에서만 사용한다는 의미로
+     * inner class로 만들어줘도 충분하다.
+     */
     @Data
     @AllArgsConstructor
     static class CreateMemberResponse{
+        /**
+         * @JsonIgnore 컨버터에의해 json으로 변환되는것을 방지
+         */
+        //@JsonIgnore
         private Long id;
     }
 
@@ -60,6 +96,40 @@ public class MemberApiController {
     static class CreateMemberRequest {
         @NotEmpty
         private String name;
+        @NotEmpty
+        private String city;
+        @NotEmpty
+        private String street;
+        @NotEmpty
+        private String zipcode;
     }
 
+    @Data
+    private static class UpdateMemberRequest {
+        @NotEmpty
+        private String name;
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class UpdateMemberResponse {
+        private Long id;
+        private String name;
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class Result<T> {
+        private int count;
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class MemberDTO {
+        private String name;
+        private String city;
+        private String street;
+        private String zipcode;
+    }
 }
