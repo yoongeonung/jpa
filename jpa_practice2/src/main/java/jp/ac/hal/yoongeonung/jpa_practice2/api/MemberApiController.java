@@ -1,5 +1,6 @@
 package jp.ac.hal.yoongeonung.jpa_practice2.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.ac.hal.yoongeonung.jpa_practice2.domain.Address;
 import jp.ac.hal.yoongeonung.jpa_practice2.domain.Member;
 import jp.ac.hal.yoongeonung.jpa_practice2.service.MemberService;
@@ -19,6 +20,14 @@ public class MemberApiController {
 
     private final MemberService memberService;
 
+    /**
+     * 절대로 엔티티를 외부로 노출시켜서는 안된다.
+     * DTO나 VO를 사용하여 반환하는게 좋다.
+     * 엔티티의 변경사항이 생기면 API스펙이 바뀌어버려
+     * 큰 장애의 원인이 된다.
+     * 또 한 엔티티의 정보가 모두 노출되기때문에
+     * 보안상 좋지않다.
+     */
     @GetMapping("/api/v1/members")
     public List<Member> membersV1() {
         return memberService.findAll();
@@ -59,7 +68,8 @@ public class MemberApiController {
     public CreateMemberResponse saveMemberV2(@RequestBody @Valid CreateMemberRequest createMemberRequest) {
         Member member = new Member();
         member.setName(createMemberRequest.getName());
-        member.setAddress(new Address(createMemberRequest.getCity(),createMemberRequest.getStreet(),createMemberRequest.getZipcode()));
+        member.setAddress(new Address(createMemberRequest.getAddress().getCity(),createMemberRequest.getAddress().getStreet(), createMemberRequest.getAddress().getZipcode()));
+//        member.setAddress(new Address(createMemberRequest.getCity(),createMemberRequest.getStreet(),createMemberRequest.getZipcode()));
         Long joinedId = memberService.join(member);
         return new CreateMemberResponse(joinedId);
     }
@@ -96,12 +106,14 @@ public class MemberApiController {
     static class CreateMemberRequest {
         @NotEmpty
         private String name;
-        @NotEmpty
-        private String city;
-        @NotEmpty
-        private String street;
-        @NotEmpty
-        private String zipcode;
+        //        @NotEmpty
+//        private String city;
+//        @NotEmpty
+//        private String street;
+//        @NotEmpty
+//        private String zipcode;
+        @JsonProperty("address")
+        private Address address;
     }
 
     @Data
