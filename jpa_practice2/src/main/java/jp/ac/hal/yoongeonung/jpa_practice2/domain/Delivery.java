@@ -14,7 +14,7 @@ public class Delivery {
     @Column(name = "DELIVERY_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
     @Embedded
     private Address address;
