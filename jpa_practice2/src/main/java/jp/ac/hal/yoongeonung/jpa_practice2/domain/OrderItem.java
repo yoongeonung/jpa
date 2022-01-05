@@ -1,5 +1,6 @@
 package jp.ac.hal.yoongeonung.jpa_practice2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.ac.hal.yoongeonung.jpa_practice2.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class OrderItem {
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
+    @JsonIgnore // 양방향 매핑의 경우 json매핑 한쪽을 끊어주지 않을경우 무한루프에 빠진다.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private Order order;

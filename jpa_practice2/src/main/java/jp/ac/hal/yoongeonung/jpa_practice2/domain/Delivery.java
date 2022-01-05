@@ -1,5 +1,6 @@
 package jp.ac.hal.yoongeonung.jpa_practice2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
+    @JsonIgnore // 양방향 매핑의 경우 json매핑 한쪽을 끊어주지 않을경우 무한루프에 빠진다.
     private Order order;
     @Embedded
     private Address address;
