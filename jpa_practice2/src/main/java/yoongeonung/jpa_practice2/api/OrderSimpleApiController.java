@@ -1,13 +1,19 @@
 package yoongeonung.jpa_practice2.api;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import yoongeonung.jpa_practice2.domain.Address;
 import yoongeonung.jpa_practice2.domain.Order;
+import yoongeonung.jpa_practice2.domain.OrderStatus;
 import yoongeonung.jpa_practice2.repository.OrderRepository;
 import yoongeonung.jpa_practice2.repository.OrderSearch;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * xToOne (ManyToOne, OneToOne)
@@ -35,5 +41,41 @@ public class OrderSimpleApiController {
             order.getDelivery().getStatus(); // Lazy Loading을 강제적으로 초기화
         }
         return all;
+    }
+
+    /**
+     * Lazy Loading에 대한 N+1문제가 여전히 존재한다.
+     * EAGER로 바꾼다고 해결되지 않음, 오히려 악화
+     */
+    @GetMapping("/api/v2/simple-orders")
+    public Result ordersV2() {
+        List<SimpleOrderDto> result = orderRepository.findAllByString(new OrderSearch())
+                .stream()
+                .map(SimpleOrderDto::new)
+                .collect(Collectors.toList());
+        return new Result(result);
+    }
+
+    @AllArgsConstructor
+    @Data
+    private static class Result<T> {
+        private T data;
+    }
+
+    @Data
+    private static class SimpleOrderDto {
+        private Long orderId;
+        private String name;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Address address;
+
+        public SimpleOrderDto(Order order) {
+            orderId = order.getId();
+            name = order.getMember().getName();
+            orderDate = order.getOrderDate();
+            orderStatus = order.getStatus();
+            address = order.getDelivery().getAddress();
+        }
     }
 }
