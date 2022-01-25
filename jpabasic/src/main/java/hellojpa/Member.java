@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
@@ -17,5 +16,16 @@ import javax.persistence.Table;
 public class Member {
     @Id
     private Long id;
-    private String name;
+    @Column(name = "name")
+    private String username;
+    private byte age;
+    @Enumerated(EnumType.STRING)
+    private RoleType role_type;
+    private LocalDate created_date;
+    private LocalDate last_modified_date;
+    @Lob
+    private String description;
+    // only in memory
+//    @Transient
+//    private String temp;
 }
