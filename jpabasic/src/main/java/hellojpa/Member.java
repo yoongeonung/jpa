@@ -10,11 +10,12 @@ import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
-@AllArgsConstructor
 @NoArgsConstructor // JPA는 기본생성자를 이용한다.
 @Table(name = "member") // 테이블의 이름을 지정
+@SequenceGenerator(name = "MEMBER_SEQ_GENERATOR", sequenceName = "MEMBER_SEQ", initialValue = 1,allocationSize = 50)
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
     @Column(name = "name")
     private String username;
@@ -25,7 +26,13 @@ public class Member {
     private LocalDate last_modified_date;
     @Lob
     private String description;
-    // only in memory
-//    @Transient
-//    private String temp;
+
+    public Member(String username, byte age, RoleType role_type, LocalDate created_date, LocalDate last_modified_date, String description) {
+        this.username = username;
+        this.age = age;
+        this.role_type = role_type;
+        this.created_date = created_date;
+        this.last_modified_date = last_modified_date;
+        this.description = description;
+    }
 }

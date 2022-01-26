@@ -16,7 +16,7 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member(1L, "Line", (byte) 23, RoleType.ADMIN, LocalDate.now(),LocalDate.now(), "dhsjkhqjkhwekjhqkjhdk");
+            Member member = new Member("naver", (byte) 14, RoleType.ADMIN, LocalDate.now(),LocalDate.now(), "qjklwqjekljadmin");
             em.persist(member);
 
             tx.commit();

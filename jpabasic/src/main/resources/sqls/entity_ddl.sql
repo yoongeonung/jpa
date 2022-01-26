@@ -1,7 +1,7 @@
 drop table if exists member;
 create table member
 (
-    id   bigint,
+    id   bigint auto_increment,
     name varchar(50),
     age tinyint,
     role_type enum('USER', 'ADMIN'),
