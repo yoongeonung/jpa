@@ -22,6 +22,6 @@ public class Member {
     private String street;
     @Column(name = "ZIPCODE")
     private String zipcode;
-    @OneToMany
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 }

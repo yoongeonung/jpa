@@ -15,7 +15,7 @@ create table ORDERS
 (
     ORDER_ID  bigint,
     ORDERDATE date not null,
-    STATUS    enum ('PENDING','ORDER'),
+    STATUS    enum ('ORDER','CANCEL'),
     MEMBER_ID bigint,
     primary key (ORDER_ID),
     foreign key (MEMBER_ID) references MEMBER(MEMBER_ID)

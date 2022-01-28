@@ -18,10 +18,11 @@ public class Order {
     @Column(name = "ORDERDATE")
     private LocalDate orderDate;
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-    @OneToMany
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 }
