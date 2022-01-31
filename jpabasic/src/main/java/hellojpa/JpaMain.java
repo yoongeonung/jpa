@@ -16,9 +16,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
+            Team team = new Team();
+            team.setName("Avengers");
             Member member = new Member("naver", (byte) 14, RoleType.ADMIN, LocalDate.now(),LocalDate.now(), "qjklwqjekljadmin");
+            member.setTeam(team);
+            //
+            em.persist(team);
             em.persist(member);
-
+            //
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

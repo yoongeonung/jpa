@@ -27,6 +27,10 @@ public class Member {
     @Lob
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID") // FK를 가지고있는쪽이 연관관계의 주인이 된다.
+    private Team team;
+
     public Member(String username, byte age, RoleType role_type, LocalDate created_date, LocalDate last_modified_date, String description) {
         this.username = username;
         this.age = age;
