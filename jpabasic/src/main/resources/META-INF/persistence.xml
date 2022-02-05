@@ -4,6 +4,7 @@
         <!--   spring boot을 이용시에는 자동 추가되나, Jpa를 스프링없이 순수 이용시 클래스를 꼭 명기해줘야한다.      -->
         <class>hellojpa.Member</class>
         <class>hellojpa.Team</class>
+        <class>hellojpa.Locker</class>
         <properties>
             <!-- 필수 속성 -->
 <!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->

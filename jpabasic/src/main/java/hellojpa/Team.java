@@ -17,6 +17,6 @@ public class Team {
     /**
      * mappedBy -> 연관관계의 주인을 말해준다. 나는 team에 의해 관리가 되고있고, 나는 읽기전용이다.
      */
-    @OneToMany(mappedBy = "team")
-    private List<Member> members = new ArrayList<>();
+//    @OneToMany(mappedBy = "team")
+//    private List<Member> members = new ArrayList<>();
 }
