@@ -16,28 +16,12 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member("naver", (byte) 14, RoleType.ADMIN, LocalDate.now(),LocalDate.now(), "qjklwqjekljadmin");
-            System.out.println(member.getId());
-            Locker locker1 = new Locker();
-            System.out.println(locker1.getId());
-            locker1.setName("naverOnly");
-            Locker locker2 = new Locker();
-            locker2.setName("lineOnly");
-
-            System.out.println("=============1 update 1==============");
-            member.setLocker(locker1);
-            member.setLocker(locker2);
-            System.out.println("=============2 update 2==============");
+            Book book = new Book();
+            book.setAuthor("name");
+            book.setIsbn("sajdkl1u238ol");
+            em.persist(book);
             //
-            System.out.println("=============1 persist 1==============");
-            em.persist(locker1);
-            em.persist(locker2);
-            em.persist(member);
-            System.out.println("=============2 persist 2==============");
-            //
-            System.out.println("=============1 commit 1==============");
             tx.commit();
-            System.out.println("=============2 commit 2==============");
         } catch (Exception e) {
             tx.rollback();
         } finally {
