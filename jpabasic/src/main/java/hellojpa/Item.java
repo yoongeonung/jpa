@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
-public class Item {
+public class Item extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
