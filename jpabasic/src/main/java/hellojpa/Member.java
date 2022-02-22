@@ -29,6 +29,10 @@ public class Member {
     @JoinColumn(name = "locker_id")
     private Locker locker;
 
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
     public Member(String username, byte age, RoleType role_type, LocalDate created_date, LocalDate last_modified_date, String description) {
         this.username = username;
         this.age = age;
