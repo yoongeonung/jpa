@@ -16,24 +16,8 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Child child1 = new Child();
-            Child child2 = new Child();
-            child1.setName("kakao");
-            child2.setName("line");
 
-            Parent parent = new Parent();
-            parent.setName("KOREA");
-            parent.addChild(child1, child2);
-
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-            Parent parent1 = em.find(Parent.class, 1L);
-            //
-            parent1.getChildren().remove(0);
-            //
+            Member2 member2 = new Member2();
 
             //
             tx.commit();
