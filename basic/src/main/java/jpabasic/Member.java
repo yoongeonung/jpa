@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Entity // JPAが管理するオブジェクト
 @Table(name = "member")
 @Getter @Setter
-public class Member extends Team {
+public class Member {
     @Id
     private Long id;
     private String name;
+
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
