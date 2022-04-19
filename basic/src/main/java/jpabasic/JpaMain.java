@@ -13,18 +13,19 @@ public class JpaMain {
         transaction.begin();
 
         try {
+
             Member member = new Member();
             member.setId(1L);
-            member.setName("basic");
+            member.setName("basicMember");
 
-            Team team = new Team();
-            team.setId(1L);
-            team.setName("TeamA");
-            // ??
-            team.getMembers().add(member);
+            Locker locker = new Locker();
+            locker.setId(1L);
+            locker.setName("basicMember's locker");
 
+            member.setLocker(locker);
+
+            manager.persist(locker);
             manager.persist(member);
-            manager.persist(team);
 
             transaction.commit();
         } catch (Exception e) {

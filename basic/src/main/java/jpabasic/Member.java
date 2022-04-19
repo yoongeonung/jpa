@@ -10,10 +10,11 @@ import javax.persistence.*;
 @Getter @Setter
 public class Member {
     @Id
+    @Column(name = "member_id")
     private Long id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id", insertable = false, updatable = false)
-    private Team team;
+    @OneToOne
+    @JoinColumn(name = "locker_id")
+    private Locker locker;
 }
