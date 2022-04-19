@@ -12,8 +12,4 @@ public class Member {
     @Id
     private Long id;
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
 }

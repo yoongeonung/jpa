@@ -16,11 +16,15 @@ public class JpaMain {
             Member member = new Member();
             member.setId(1L);
             member.setName("basic");
-            // 영속화
-            manager.persist(member);
-            // 1차캐시에서 조회
-            Member basicMember = manager.find(Member.class, 1L);
 
+            Team team = new Team();
+            team.setId(1L);
+            team.setName("TeamA");
+            // ??
+            team.getMembers().add(member);
+
+            manager.persist(member);
+            manager.persist(team);
 
             transaction.commit();
         } catch (Exception e) {
