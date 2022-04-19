@@ -12,4 +12,8 @@ public class Member {
     @Id
     private Long id;
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id", insertable = false, updatable = false)
+    private Team team;
 }
