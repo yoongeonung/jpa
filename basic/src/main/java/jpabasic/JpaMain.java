@@ -14,18 +14,13 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setId(1L);
-            member.setName("basicMember");
+            Snack snack = new Snack();
+            snack.setId(3L);
+            snack.setName("ポテトチップ");
+            snack.setPrice(900);
+            snack.setTexture("サクサク");
 
-            Locker locker = new Locker();
-            locker.setId(1L);
-            locker.setName("basicMember's locker");
-
-            member.setLocker(locker);
-
-            manager.persist(locker);
-            manager.persist(member);
+            manager.persist(snack);
 
             transaction.commit();
         } catch (Exception e) {
@@ -36,4 +31,5 @@ public class JpaMain {
         }
         factory.close();
     }
+
 }
