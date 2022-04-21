@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter
-@DiscriminatorColumn(name = "dtype")
-public class Item {
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity{
     @Id
     @Column(name = "item_id")
     private Long id;
