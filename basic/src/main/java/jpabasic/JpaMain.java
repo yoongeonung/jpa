@@ -1,48 +1,42 @@
 package jpabasic;
 
-import jpabasic.onetoone.Member;
-
+import java.time.LocalDateTime;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import jpabasic.valuetype.Address;
+import jpabasic.valuetype.Period;
 
 public class JpaMain {
-    public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("basic");
-        EntityManager manager = factory.createEntityManager();
-        EntityTransaction transaction = manager.getTransaction();
-        transaction.begin();
 
-        try {
+  public static void main(String[] args) {
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("basic");
+    EntityManager manager = factory.createEntityManager();
+    EntityTransaction transaction = manager.getTransaction();
+    transaction.begin();
 
-            Member member1 = new Member();
-            member1.setName("member1");
-            manager.persist(member1);
+    try {
 
-            Member member2 = new Member();
-            member2.setName("member2");
-            manager.persist(member2);
+      Address workAddress = new Address("seoul", "garosu-gil", "111");
+      Address homeAddress = new Address("seoul", "gangnam-gil", "222");
+      Member member = new Member("userA", new Period(LocalDateTime.now(), LocalDateTime.now()),
+          homeAddress, workAddress);
 
-            manager.flush();
-            manager.clear();
+      member.changeWorkAddress(
+          new Address("pangyo", workAddress.getStreet(),
+              workAddress.getZipcode()));
 
-            Member m1 = manager.getReference(Member.class, member1.getId());
-            System.out.println("m1 = " + m1.getClass());
-            Member m2 = manager.find(Member.class, member2.getId());
-            System.out.println("m2 = " + m2.getClass());
+      manager.persist(member);
 
-            System.out.println("m1 == m2 : " + (m1.getClass() == m2.getClass()));
-            System.out.println("m1 == Member : " + (m1 instanceof Member));
-
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            transaction.rollback();
-        } finally {
-            manager.close();
-        }
-        factory.close();
+      transaction.commit();
+    } catch (Exception e) {
+      e.printStackTrace();
+      transaction.rollback();
+    } finally {
+      manager.close();
     }
+    factory.close();
+  }
 
 }
