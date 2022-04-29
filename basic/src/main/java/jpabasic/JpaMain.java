@@ -1,12 +1,10 @@
 package jpabasic;
 
-import java.time.LocalDateTime;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import jpabasic.valuetype.Address;
-import jpabasic.valuetype.Period;
 
 public class JpaMain {
 
@@ -17,17 +15,24 @@ public class JpaMain {
     transaction.begin();
 
     try {
+      Member member1 = new Member();
+      member1.getAddresseHistory().add(new Address("seoul", "garosu-gil", "1111"));
+      member1.getAddresseHistory().add(new Address("busan", "haeundae-gil", "2222"));
 
-      Address workAddress = new Address("seoul", "garosu-gil", "111");
-      Address homeAddress = new Address("seoul", "gangnam-gil", "222");
-      Member member = new Member("userA", new Period(LocalDateTime.now(), LocalDateTime.now()),
-          homeAddress, workAddress);
+      member1.getFavoriteFoods().add("kimchi-jjigae");
+      member1.getFavoriteFoods().add("kong-guksu");
+      manager.persist(member1);
 
-      member.changeWorkAddress(
-          new Address("pangyo", workAddress.getStreet(),
-              workAddress.getZipcode()));
+      manager.flush();
+      manager.clear();
 
-      manager.persist(member);
+      Member findMember = manager.find(Member.class, 1L);
+      findMember.getAddresseHistory().remove(new Address("busan", "haeundae-gil", "2222"));
+      findMember.getAddresseHistory().add(new Address("ulsan", "ulsan-gil", "3333"));
+
+      findMember.getFavoriteFoods().remove("kong-guksu");
+      findMember.getFavoriteFoods().add("janchi-guksu");
+
 
       transaction.commit();
     } catch (Exception e) {
