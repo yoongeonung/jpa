@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
     <persistence-unit name="basic">
-        <class>jpabasic.Member</class>
+        <class>jpabasic.domain.Member</class>
+        <class>jpabasic.domain.Team</class>
+        <class>jpabasic.domain.Order</class>
+        <class>jpabasic.domain.Product</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
