@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "member")
 @Getter
 @NoArgsConstructor
+@NamedQuery(
+    name = "Member.findByUsername",
+    query="select m from Member m where m.username = :username")
 public class Member {
 
   @Id
@@ -25,7 +29,7 @@ public class Member {
   private String username;
   private byte age;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "team_id")
   private Team team;
 
