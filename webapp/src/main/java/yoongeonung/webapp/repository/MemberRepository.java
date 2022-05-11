@@ -10,7 +10,7 @@ import yoongeonung.webapp.domain.Member;
 @RequiredArgsConstructor
 public class MemberRepository {
 
-  private EntityManager entityManager;
+  private final EntityManager entityManager;
 
   public void save(Member member) {
     entityManager.persist(member);
