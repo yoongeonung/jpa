@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
     <persistence-unit name="basic">
-        <class>jpabasic.domain.Member</class>
-        <class>jpabasic.domain.Team</class>
-        <class>jpabasic.domain.Order</class>
-        <class>jpabasic.domain.Product</class>
+        <class>jpabasic.mtom.Member</class>
+        <class>jpabasic.mtom.Product</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
@@ -16,7 +14,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
 <!--            <property name="hibernate.jdbc.batch_size" value="10"/>-->
-            <property name="hibernate.hbm2ddl.auto" value="validate" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
 <!--            <property name="hibernate.discriminator.ignore_explicit_for_joined" value="true"/>-->
             <property name="hibernate.default_batch_fetch_size" value="100"/>
         </properties>

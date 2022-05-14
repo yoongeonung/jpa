@@ -1,13 +1,11 @@
 package jpabasic;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import jpabasic.domain.Member;
-import jpabasic.domain.Team;
+import jpabasic.mtom.Member;
+import jpabasic.mtom.Product;
 
 public class JpaMain {
 
@@ -19,13 +17,24 @@ public class JpaMain {
 
     try {
 
-      List<Member> members = manager
-          .createNamedQuery("Member.findByUsername", Member.class)
-          .setParameter("username", "회원1")
-          .getResultList();
-      for (Member member : members) {
-        System.out.println("member = " + member);
-      }
+      Member member = new Member();
+      member.setUsername("testMember");
+
+      Product product1 = new Product();
+      product1.setName("testProduct1");
+      Product product2 = new Product();
+      product2.setName("testProduct2");
+      Product product3 = new Product();
+      product3.setName("testProduct3");
+      member.getProducts().add(product1);
+      member.getProducts().add(product2);
+      member.getProducts().add(product3);
+
+      manager.persist(product1);
+      manager.persist(product2);
+      manager.persist(product3);
+      manager.persist(member);
+
 
       transaction.commit();
     } catch (Exception e) {
