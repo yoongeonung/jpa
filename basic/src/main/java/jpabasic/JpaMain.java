@@ -17,23 +17,7 @@ public class JpaMain {
 
     try {
 
-      Member member = new Member();
-      member.setUsername("testMember");
 
-      Product product1 = new Product();
-      product1.setName("testProduct1");
-      Product product2 = new Product();
-      product2.setName("testProduct2");
-      Product product3 = new Product();
-      product3.setName("testProduct3");
-      member.getProducts().add(product1);
-      member.getProducts().add(product2);
-      member.getProducts().add(product3);
-
-      manager.persist(product1);
-      manager.persist(product2);
-      manager.persist(product3);
-      manager.persist(member);
 
 
       transaction.commit();
