@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import yoongeonung.webapp.common.exceptions.NotEnoughStcokException;
 import yoongeonung.webapp.domain.CategoryItem;
 
@@ -18,6 +21,7 @@ import yoongeonung.webapp.domain.CategoryItem;
 @Inheritance
 @DiscriminatorColumn
 @Getter
+@Setter
 public abstract class Item {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

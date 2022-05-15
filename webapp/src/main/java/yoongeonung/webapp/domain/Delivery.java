@@ -10,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter @Setter(value = AccessLevel.PRIVATE)
 public class Delivery {
 
   @Id
@@ -27,4 +31,16 @@ public class Delivery {
 
   @Enumerated(EnumType.STRING)
   private DeliveryStatus status;
+
+  public void relateOrder(Order order) {
+    this.order = order;
+  }
+
+  public static Delivery create(Address address, DeliveryStatus status) {
+    Delivery delivery = new Delivery();
+    delivery.setAddress(address);
+    delivery.setStatus(status);
+
+    return delivery;
+  }
 }

@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(
@@ -27,6 +31,9 @@ import javax.persistence.UniqueConstraint;
             columnNames = {"order_id", "delivery_id"})
     }
 )
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter(value = AccessLevel.PRIVATE)
 public class Order {
 
   @Id
@@ -49,5 +56,53 @@ public class Order {
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "delivery_id")
   private Delivery delivery;
+
+  public void relateMember(Member member) {
+    this.member = member;
+    member.getOrders().add(this);
+  }
+
+  public void relateOrderItem(OrderItem orderItem) {
+    orderItems.add(orderItem);
+    orderItem.relateOrder(this);
+  }
+
+  public void relateDelivery(Delivery delivery) {
+    this.delivery = delivery;
+    delivery.relateOrder(this);
+  }
+
+  public static Order create(Member member, Delivery delivery, OrderItem... orderItems) {
+    Order order = new Order();
+    order.relateMember(member);
+    order.relateDelivery(delivery);
+    for (OrderItem orderItem : orderItems) {
+      order.relateOrderItem(orderItem);
+    }
+
+    order.setStatus(OrderStatus.ORDER);
+    order.setOrderDate(LocalDateTime.now());
+    return order;
+  }
+
+  public void cancel() {
+    if (delivery.getStatus() == DeliveryStatus.COMP) {
+      throw new IllegalStateException("Delivered Item is can't cancel");
+    }
+    this.setStatus(OrderStatus.CANCEL);
+    for (OrderItem orderItem : orderItems) {
+      orderItem.cancel();
+    }
+  }
+
+  public int getTotalPrice() {
+    int totalPrice = 0;
+    for (OrderItem orderItem : orderItems) {
+      totalPrice += orderItem.getTotalPrice();
+    }
+    return totalPrice;
+  }
+
+
 
 }
