@@ -15,4 +15,12 @@ public class Book extends Item{
   @Column(length = 50)
   private String isbn;
 
+  public static Book create(String bookname, int price, int quantity) {
+    Book book = new Book();
+    book.setName(bookname);
+    book.setPrice(price);
+    book.setStockQuantity(quantity);
+    return book;
+  }
+
 }

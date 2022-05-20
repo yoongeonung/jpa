@@ -37,7 +37,6 @@ public abstract class Item {
   @OneToMany(mappedBy = "item")
   private List<CategoryItem> categoryItems = new ArrayList<>();
 
-
   public void increaseStock(int quantity) {
     stockQuantity += quantity;
   }

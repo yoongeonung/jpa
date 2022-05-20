@@ -1,6 +1,5 @@
 package yoongeonung.webapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -17,18 +16,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter(value = AccessLevel.PRIVATE)
+@Getter
+@Setter(value = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "member_id")
   private Long id;
   @Column(length = 50)
-  @NotEmpty
+  @NotEmpty @Setter
   private String name;
   @Embedded
-  @JsonProperty
   private Address address;
 
   @OneToMany(mappedBy = "member")
@@ -41,8 +41,9 @@ public class Member {
 
   // create Member
   public static Member create(String name, Address address) {
-    return  new Member(name, address);
+    return new Member(name, address);
   }
+
 
   @Override
   public String toString() {
