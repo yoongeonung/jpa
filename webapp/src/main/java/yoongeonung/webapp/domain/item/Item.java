@@ -14,9 +14,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import yoongeonung.webapp.common.exceptions.NotEnoughStcokException;
 import yoongeonung.webapp.domain.CategoryItem;
 
+@Slf4j
 @Entity
 @Inheritance
 @DiscriminatorColumn
@@ -38,6 +40,7 @@ public abstract class Item {
   private List<CategoryItem> categoryItems = new ArrayList<>();
 
   public void increaseStock(int quantity) {
+    log.info("quantity = {} ", quantity);
     stockQuantity += quantity;
   }
 

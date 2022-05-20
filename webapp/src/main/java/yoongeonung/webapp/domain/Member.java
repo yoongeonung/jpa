@@ -1,5 +1,6 @@
 package yoongeonung.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -31,6 +32,7 @@ public class Member {
   @Embedded
   private Address address;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "member")
   private List<Order> orders = new ArrayList<>();
 

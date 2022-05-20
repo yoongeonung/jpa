@@ -1,5 +1,6 @@
 package yoongeonung.webapp.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import yoongeonung.webapp.domain.DeliveryStatus;
 import yoongeonung.webapp.domain.Member;
 import yoongeonung.webapp.domain.Order;
 import yoongeonung.webapp.domain.OrderItem;
+import yoongeonung.webapp.domain.OrderSearch;
 import yoongeonung.webapp.domain.item.Item;
 import yoongeonung.webapp.repository.ItemRepository;
 import yoongeonung.webapp.repository.MemberRepository;
@@ -37,13 +39,14 @@ public class OrderService {
     return order.getId();
   }
 
+  @Transactional
   public void cancel(Long orderId) {
     Order order = orderRepository.findOne(orderId);
     order.cancel();
   }
 
-//  public List<Order> findOrders(OrderSearch orderSearch) {
-//
-//    return orderRepository.findAll(orderSearch);
-//  }
+  public List<Order> findOrders(OrderSearch orderSearch) {
+    return orderRepository.findAllByString(orderSearch);
+  }
+
 }

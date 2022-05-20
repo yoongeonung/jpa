@@ -1,5 +1,6 @@
 package yoongeonung.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,6 +31,7 @@ public class OrderItem {
   @JoinColumn(name = "item_id",foreignKey = @ForeignKey(name = "fk_orderitem_item"))
   private Item item;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "orders_id", foreignKey = @ForeignKey(name = "fk_orderitem_order"))
   private Order order;

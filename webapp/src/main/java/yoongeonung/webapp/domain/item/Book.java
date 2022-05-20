@@ -3,11 +3,12 @@ package yoongeonung.webapp.domain.item;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Setter
+@Setter @Getter
 public class Book extends Item{
 
   @Column(length = 50)
