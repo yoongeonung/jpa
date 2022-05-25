@@ -39,7 +39,9 @@ public class OrderSimpleApiController {
   }
 
   /**
-   * V2. 엔티티를 조회해서 DTO로 변환(fetch join 사용X) * - 단점: 지연로딩으로 쿼리 N번 호출
+   * V2. 엔티티를 조회해서 DTO로 변환(fetch join 사용X)
+   *
+   * - 단점: 지연로딩으로 쿼리 N번 호출
    */
   @GetMapping("/api/v2/simple-orders")
   public List<SimpleOrderDto> ordersV2() {
@@ -49,6 +51,11 @@ public class OrderSimpleApiController {
     return result;
   }
 
+  @GetMapping("/api/v3/simple-orders")
+  public List<SimpleOrderDto> ordersV3() {
+    List<Order> all = orderRepository.findAllWithMemberDelivery();
+    return all.stream().map(o -> new SimpleOrderDto(o)).collect(Collectors.toList());
+  }
 
   @Data
   private static class SimpleOrderDto {
