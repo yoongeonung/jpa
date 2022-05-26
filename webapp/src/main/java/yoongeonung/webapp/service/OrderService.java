@@ -12,7 +12,7 @@ import yoongeonung.webapp.domain.OrderItem;
 import yoongeonung.webapp.domain.OrderSearch;
 import yoongeonung.webapp.domain.item.Item;
 import yoongeonung.webapp.repository.ItemRepository;
-import yoongeonung.webapp.repository.MemberRepository;
+import yoongeonung.webapp.repository.OldMemberRepository;
 import yoongeonung.webapp.repository.OrderRepository;
 
 @Service
@@ -20,7 +20,7 @@ import yoongeonung.webapp.repository.OrderRepository;
 @Transactional(readOnly = true)
 public class OrderService {
 
-  private final MemberRepository memberRepository;
+  private final OldMemberRepository memberRepository;
   private final ItemRepository itemRepository;
   private final OrderRepository orderRepository;
 

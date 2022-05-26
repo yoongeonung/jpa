@@ -5,14 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yoongeonung.webapp.domain.Member;
-import yoongeonung.webapp.repository.MemberRepository;
+import yoongeonung.webapp.repository.OldMemberRepository;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberService {
 
-  private final MemberRepository memberRepository;
+  private final OldMemberRepository memberRepository;
 
   @Transactional
   public Long join(Member member) {
