@@ -12,6 +12,8 @@ import yoongeonung.webapp.domain.Order;
 import yoongeonung.webapp.domain.OrderSearch;
 import yoongeonung.webapp.domain.OrderStatus;
 import yoongeonung.webapp.repository.OrderRepository;
+import yoongeonung.webapp.repository.order.simplequery.OrderSimpleQueryDto;
+import yoongeonung.webapp.repository.order.simplequery.OrderSimpleQueryRepository;
 
 
 /**
@@ -22,6 +24,7 @@ import yoongeonung.webapp.repository.OrderRepository;
 public class OrderSimpleApiController {
 
   private final OrderRepository orderRepository;
+  private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
   /**
    * V1. 엔티티 직접 노출 - Hibernate5Module 모듈 등록, LAZY=null 처리 - 양방향 관계 문제 발생 -> @JsonIgnore
@@ -55,6 +58,11 @@ public class OrderSimpleApiController {
   public List<SimpleOrderDto> ordersV3() {
     List<Order> all = orderRepository.findAllWithMemberDelivery();
     return all.stream().map(o -> new SimpleOrderDto(o)).collect(Collectors.toList());
+  }
+
+  @GetMapping("/api/v4/simple-orders")
+  public List<OrderSimpleQueryDto> ordersV4() {
+    return orderSimpleQueryRepository.findOrderDtos();
   }
 
   @Data
